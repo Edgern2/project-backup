@@ -95,7 +95,7 @@ def reserve():
     data = request.get_json()
     name = data.get('name')
     identity = session['identity']
-    book_title = data.get('detail-title')
+    book_title = data.get('bookTitle')
     location = data.get('location')
     reserveTime = data.get('reserveTime')
 
@@ -108,9 +108,10 @@ def reserve():
     
     if len(booklist[info]) < 10:
         booklist[info].append([book_title, location, dateTime])
-        print(booklist)
     else:
-        return jsonify({'success': False})
+        return jsonify({'success': False, 'message': 'Too many books'})
+    
+    print(booklist)
 
     # Respond with a success message
     return jsonify({'success': True})

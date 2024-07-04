@@ -12,7 +12,7 @@ function reserve(){
     const formData = {
         name: document.getElementById('name').innerHTML,
         identity: document.getElementById('identity').innerHTML,
-        bookTitle: document.getElementById('detail-title').value,
+        bookTitle: document.getElementById('detail-title').textContent,
         location: document.getElementById('location').value,
         reserveTime: new Date().toISOString()
     };
@@ -31,7 +31,7 @@ function reserve(){
             document.getElementById('confirmationMessage').style.display = 'block';
             document.getElementById('reservationForm').reset();
         } else {
-            alert('There was a problem with your reservation. Please try again.');
+            alert('Too many books borrowed');
         }
     })
     .catch(error => console.error('Error:', error));

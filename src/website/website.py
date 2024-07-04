@@ -9,8 +9,8 @@ app = Flask(__name__)
 CORS(app)
 
 BASE_URL = 'http://127.0.0.1:5000'
-log = logging.getLogger('werkzeug')
-log.setLevel(logging.ERROR)
+'''log = logging.getLogger('werkzeug')
+log.setLevel(logging.ERROR)'''
 
 booklist = {}
 session = {}
@@ -42,6 +42,7 @@ passwords = load_passwords()
 
 @app.route('/login', methods=['POST'])
 def login():
+    print('login')
     data = request.get_json()
     identity = data.get('identity')
     password = data.get('password')
@@ -63,12 +64,15 @@ def get_session():
 
 @app.route('/logout', methods=['POST'])
 def logout():
+    print('logout')
+    print("attempt to log out")
     session.pop('identity', None)
     session.pop('name', None)
     return jsonify({'success': True})
 
 @app.route('/signup', methods=['POST'])
 def signup():
+    print('signup')
     data = request.get_json()
     identity = data.get('identity')
     password = data.get('password')
@@ -83,6 +87,7 @@ def signup():
 
 @app.route('/reserve', methods=['POST'])
 def reserve():
+    print('reserve')
     if 'identity' not in session:
         return jsonify({'success': False, 'message': 'Not logged in'})
     print("submit req")
